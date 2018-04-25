@@ -7447,6 +7447,11 @@ MOBILE - EXTRA SMALL SCREENS
   display: flex;
   justify-content: center;
 }
+
+.footer-box {
+  display: flex;
+  justify-content: center;
+}
 /*
 ==============================
 INTERNET EXPLORER < 10
