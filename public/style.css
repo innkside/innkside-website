@@ -7438,6 +7438,15 @@ MOBILE - EXTRA SMALL SCREENS
 .icono {
   color: #4370E6;
 }
+
+.side_icon {
+  color: #4370E6;
+}
+
+.icon-box {
+  display: flex;
+  justify-content: center;
+}
 /*
 ==============================
 INTERNET EXPLORER < 10
