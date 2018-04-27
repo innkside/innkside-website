@@ -19,7 +19,7 @@ app.post('/', (req, res) => {
     service: 'gmail',
     auth: {
       user: 'royal.v98@gmail.com',
-      pass: 'la programacion es arte interactivo'
+      pass: ' '
     }
   })
 
