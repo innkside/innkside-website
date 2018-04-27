@@ -14,6 +14,30 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/innkside.html')
 })
 
+app.post('/', (req, res) => {
+  let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'royal.v98@gmail.com',
+      pass: 'la programacion es arte interactivo'
+    }
+  })
+
+  let mamilOptions = {
+    to: 'rvillarreal416@gmail.com', // list of receivers
+    subject: `Somebody joined to innkside: ${req.body.email} `, // Subject line
+    text: `EMAIL ----> ${req.body.email} `// plain text body
+  }
+
+  transporter.sendMail(mamilOptions, (err, info) => {
+    if (err) {
+      res.send('There was an error :( Try again please.')
+    } else {
+      res.send('Thank you! we will be contacting you :) ')
+    }
+  })
+})
+
 app.listen(port, (e) => {
   if (e) {
     console.error('There was an error starting server', e)

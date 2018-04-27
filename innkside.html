@@ -165,17 +165,18 @@
                     <h4 class="white text-l">Join our pre launch</h4>
                 </div>
                 <div class="col-md-6">
-                    <form action="" class="form-box form-ajax form-inline white" method="post" data-email="">
+                    <form id="emailForm" class="form-box form-ajax form-inline white">
                         <input id="email" name="email" placeholder="Your email address" type="email" class="form-control form-value" required>
                         <hr class="space m">
                         <button id="join" class="btn btn-sm" type="submit">Join</button>
-                        <!-- <div class="success-box">
-                            <div class="alert alert-success">Congratulations. Your message has been sent successfully</div>
-                        </div>
-                        <div class="error-box">
-                            <div class="alert alert-warning">Error, please retry. Your message has not been sent</div>
-                        </div> -->
                     </form>
+                     <div id="preloader" class="loader"></div>
+                    <div id="green-box" class="success-box caja">
+                        <div class="alert alert-success">Congratulations. Your message has been sent successfully</div>
+                    </div>
+                    <div id="red-box" class="error-box caja">
+                        <div class="alert alert-warning">Error, please retry. Your message has not been sent</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -242,15 +243,33 @@
           firebase.initializeApp(config)
         </script>
         <script type="text/javascript">
-          const button = document.getElementById('join')
-          button.addEventListener('click', async ()=> {
-            const inputValue = await document.getElementById('email').value
-            const postRef = await firebase.database().ref('/users')
-            const pushRef = await postRef.push()
-            pushRef.set({ email: inputValue })
-            document.getElementById('email').value = ''
-            alert('thanks')
-          })
+        $(() => {
+          let fullUrl =  location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '')
+           $("#join").click(() => {
+               let form = $("#emailForm")
+               let formData = form.serialize()
+               //document.getElementById('preloader').style.display = "block"
+             $.ajax({
+               url: fullUrl+'/',
+               type: 'POST',
+               data: formData,
+               success: (result) => {
+                document.getElementById('preloader').style.display = "none"
+                document.getElementById('green-box').style.display = "block"
+                const inputValue = document.getElementById('email').value
+                const postRef = firebase.database().ref('/users')
+                const pushRef = postRef.push()
+                pushRef.set({ email: inputValue })
+                document.getElementById('email').value = ''
+             },
+             error: (e) => {
+               document.getElementById('red-box').style.display = "block"
+             },
+               dataType: "html",
+               timeout: 30000
+             })
+           })
+         })
         </script>
         <link rel="stylesheet" href="scripts/font-awesome/css/font-awesome.css">
         <script async src="scripts/bootstrap/js/bootstrap.min.js"></script>
@@ -258,7 +277,6 @@
         <script src="scripts/parallax.min.js"></script>
         <script src="scripts/flexslider/jquery.flexslider-min.js"></script>
         <script async src="scripts/isotope.min.js"></script>
-        <script async src="scripts/php/contact-form.js"></script>
         <script async src="scripts/jquery.progress-counter.js"></script>
         <script async src="scripts/jquery.tab-accordion.js"></script>
         <script async src="scripts/bootstrap/js/bootstrap.popover.min.js"></script>
