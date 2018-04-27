@@ -170,12 +170,14 @@
                         <hr class="space m">
                         <button id="join" class="btn btn-sm" type="submit">Join</button>
                     </form>
-                     <div id="preloader" class="loader"></div>
+                    <div class='col-md-12 loader-box'>
+                      <div id="cool-preloader" class="loader"></div>
+                    </div>
                     <div id="green-box" class="success-box caja">
-                        <div class="alert alert-success">Congratulations. Your message has been sent successfully</div>
+                        <div class="alert alert-success">Thank you very much! We'll be contacting you :)</div>
                     </div>
                     <div id="red-box" class="error-box caja">
-                        <div class="alert alert-warning">Error, please retry. Your message has not been sent</div>
+                        <div class="alert alert-warning">Please try again :(</div>
                     </div>
                 </div>
             </div>
@@ -248,13 +250,13 @@
            $("#join").click(() => {
                let form = $("#emailForm")
                let formData = form.serialize()
-               //document.getElementById('preloader').style.display = "block"
+               document.getElementById('cool-preloader').style.display = "block"
              $.ajax({
                url: fullUrl+'/',
                type: 'POST',
                data: formData,
                success: (result) => {
-                document.getElementById('preloader').style.display = "none"
+                document.getElementById('cool-preloader').style.display = "none"
                 document.getElementById('green-box').style.display = "block"
                 const inputValue = document.getElementById('email').value
                 const postRef = firebase.database().ref('/users')
@@ -275,6 +277,7 @@
         <script async src="scripts/bootstrap/js/bootstrap.min.js"></script>
         <script src="scripts/imagesloaded.min.js"></script>
         <script src="scripts/parallax.min.js"></script>
+        <script src="scripts/php/contact-form.js"></script>
         <script src="scripts/flexslider/jquery.flexslider-min.js"></script>
         <script async src="scripts/isotope.min.js"></script>
         <script async src="scripts/jquery.progress-counter.js"></script>

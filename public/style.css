@@ -7471,6 +7471,11 @@ MOBILE - EXTRA SMALL SCREENS
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+.loader-box {
+  display: flex;
+  justify-content: center;
+}
 /*
 ==============================
 INTERNET EXPLORER < 10
